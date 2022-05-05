@@ -1,0 +1,43 @@
+import string
+
+my_dict = {}
+#Create a dictionary with a number key paired with an alphabet
+for i , char in enumerate(string.ascii_uppercase):
+    my_dict[i + 1] = char
+
+print(f'Current Dict: {my_dict}')  #print current dictionary
+
+#Take a message
+message = input("Enter a message: ").upper()
+string_num = ""  #store the message in a string of numbers
+
+key_list = list(my_dict.keys())  #Convert the dictionary keys to a list
+
+#let's say ... (please make a more generalized parsing method for swaper)
+swaper = input("Enter a key: ")  #Take a key/swapper
+print(f'Input swaper: {swaper}')
+start_from = swaper[0].upper()  #Take the first key which is an alphabet
+shift = int(swaper[1:])  #Take the second key which is the number
+
+new_dict = {} #store new shifted keys in a new dictionary
+for counter, key in enumerate(key_list):
+    if my_dict[key] == start_from :
+        if len(key_list) >= counter + shift: #Added a method for checking whether there are enough keys within the dict - after the D value is found.
+            new_dict = {i:my_dict[key] for i,key in enumerate(key_list[counter:counter+shift])}
+
+            for i, key in enumerate(key_list[0:counter]):
+                new_dict[shift + i] = my_dict[key]
+            for key in key_list[counter + shift:]:
+                new_dict[key] = my_dict[key]
+        else:
+            print(f'There are not more than {shift} keys following the {start_from} value')
+
+#Iterate through a value(char/alphabet) that match with message given and change it to numbers         
+for char in message:
+    for key, value in new_dict.items():
+        if char == value:  #if iterated character is equal to a value in the dictionary
+            string_num += str(key + 1)  #take the key and add 1 to convert it to numbers
+            string_num += " "  #Add a space to separate the numbers
+
+print(f'Reference: {new_dict}')  #Print the reference dictionary
+print(f"Encrypted : {string_num}")  #Print the encrypted message
