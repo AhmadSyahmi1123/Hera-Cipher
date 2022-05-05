@@ -1,0 +1,19 @@
+import string
+
+my_dict = {}
+for num, char in enumerate(string.ascii_uppercase):
+    my_dict[num + 1] = char
+print(my_dict)
+
+message = input("Enter a message: ").split(" ")
+decrypted = ""
+
+key_list = list(my_dict.values())
+
+for attempt in range(1, 27):
+    for num in message:
+        for key, value in my_dict.items():
+            if  num == key:
+                decrypted += str(value)
+
+print(decrypted)
