@@ -1,3 +1,4 @@
+#Credit to @cenestpamoi in Stack Overflow for helping most of the code
 import string
 
 my_dict = {}
@@ -13,7 +14,6 @@ string_num = ""  #store the message in a string of numbers
 
 key_list = list(my_dict.keys())  #Convert the dictionary keys to a list
 
-#let's say ... (please make a more generalized parsing method for swaper)
 swaper = input("Enter a key: ")  #Take a key/swapper
 print(f'Input swaper: {swaper}')
 start_from = swaper[0].upper()  #Take the first key which is an alphabet
@@ -23,7 +23,7 @@ new_dict = {} #store new shifted keys in a new dictionary
 for counter, key in enumerate(key_list):
     if my_dict[key] == start_from :
         if len(key_list) >= counter + shift: #Added a method for checking whether there are enough keys within the dict - after the D value is found.
-            new_dict = {i:my_dict[key] for i,key in enumerate(key_list[counter:counter+shift])}
+            new_dict = {i + 1:my_dict[key] for i,key in enumerate(key_list[counter:counter+shift])}  #some dictionary comprehension that I don't understand
 
             for i, key in enumerate(key_list[0:counter]):
                 new_dict[shift + i] = my_dict[key]
